@@ -16,20 +16,12 @@ public class ProjectService {
         this.repository = repository;
     }
 
-    // public List<Project> getAllProjects() {
-    //     return repository.findAll();
-    // }
-
     public List<ProjectDTO> getAllProjects() {
     return repository.findAll()
             .stream()
             .map(this::mapToDTO)
             .collect(Collectors.toList());
 }
-
-    // public Project createProject(Project project) {
-    //     return repository.save(project);
-    // }
 
     public ProjectDTO createProject(ProjectDTO dto) {
     Project project = mapToEntity(dto);
@@ -41,17 +33,6 @@ public class ProjectService {
          repository.deleteById(id);
      }
 
-
-
-    // public Project updateProject(Long id, Project updatedProject) {
-    //     return repository.findById(id)
-    //             .map(project -> {
-    //                 project.setName(updatedProject.getName());
-    //                 project.setDescription(updatedProject.getDescription());
-    //                 return repository.save(project);
-    //             })
-    //             .orElseThrow(() -> new RuntimeException("Project not found"));
-    // }
 
     public ProjectDTO updateProject(Long id, ProjectDTO dto) {
     return repository.findById(id)

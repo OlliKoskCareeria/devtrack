@@ -1,6 +1,9 @@
 package com.devtrack.backend.model;
 
 import jakarta.persistence.*;
+import java.util.List;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 public class Project {
@@ -40,4 +43,7 @@ public class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private List<Task> tasks;
 }
