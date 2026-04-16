@@ -3,7 +3,7 @@ import com.devtrack.backend.model.Task;
 import com.devtrack.backend.dto.StatusUpdateDTO;
 import com.devtrack.backend.service.TaskService;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +22,7 @@ public class TaskController {
     }
 
     @PostMapping("/{projectId}")
-    public Task create(@PathVariable Long projectId, @RequestBody Task task) {
+    public Task create(@PathVariable Long projectId,@Valid @RequestBody Task task) {
         return service.createTask(projectId, task);
     }
 
@@ -32,7 +32,7 @@ public class TaskController {
     }
 
     @PatchMapping("/{id}/status")
-public Task updateStatus(@PathVariable Long id, @RequestBody StatusUpdateDTO dto) {
+public Task updateStatus(@PathVariable Long id,@Valid @RequestBody StatusUpdateDTO dto) {
     return service.updateStatus(id, dto.getStatus());
     }
 

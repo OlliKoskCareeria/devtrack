@@ -1,6 +1,9 @@
 package com.devtrack.backend.dto;
+import jakarta.validation.constraints.NotBlank;
 
 public class StatusUpdateDTO {
+
+    @NotBlank(message = "Status is required")
     private String status;
 
     public String getStatus() {

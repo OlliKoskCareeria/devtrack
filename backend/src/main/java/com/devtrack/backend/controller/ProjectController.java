@@ -3,7 +3,7 @@ import com.devtrack.backend.service.ProjectService;
 import com.devtrack.backend.dto.ProjectDTO;
 import com.devtrack.backend.repository.ProjectRepository;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,12 +29,12 @@ public ProjectDTO getById(@PathVariable Long id) {
 
 
 @PostMapping
-public ProjectDTO create(@RequestBody ProjectDTO dto) {
+public ProjectDTO create(@Valid @RequestBody ProjectDTO dto) {
 return service.createProject(dto);
 }
 
 @PutMapping("/{id}")
-public ProjectDTO update(@PathVariable Long id, @RequestBody ProjectDTO dto) {
+public ProjectDTO update(@PathVariable Long id,@Valid @RequestBody ProjectDTO dto) {
 return service.updateProject(id, dto);
 }
 
