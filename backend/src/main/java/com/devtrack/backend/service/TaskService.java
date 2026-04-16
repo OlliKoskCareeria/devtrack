@@ -42,7 +42,12 @@ public class TaskService {
                 return taskRepository.save(task);
             })
             .orElseThrow(() -> new RuntimeException("Task not found"));
-}
+    }
+
+    public Task getTaskById(Long id) {
+    return taskRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Task not found"));
+    }
 
 
 }

@@ -23,6 +23,13 @@ public class ProjectService {
             .collect(Collectors.toList());
 }
 
+    public ProjectDTO getProjectById(Long id) {
+    Project project = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Project not found"));
+
+    return mapToDTO(project);
+}
+
     public ProjectDTO createProject(ProjectDTO dto) {
     Project project = mapToEntity(dto);
     Project saved = repository.save(project);

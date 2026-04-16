@@ -22,6 +22,12 @@ public List<ProjectDTO> getAll() {
 return service.getAllProjects();
 }
 
+@GetMapping("/{id}")
+public ProjectDTO getById(@PathVariable Long id) {
+    return service.getProjectById(id);
+}
+
+
 @PostMapping
 public ProjectDTO create(@RequestBody ProjectDTO dto) {
 return service.createProject(dto);

@@ -34,8 +34,12 @@ public class TaskController {
     @PatchMapping("/{id}/status")
 public Task updateStatus(@PathVariable Long id, @RequestBody StatusUpdateDTO dto) {
     return service.updateStatus(id, dto.getStatus());
-}
+    }
 
+    @GetMapping("/{id}")
+    public Task getById(@PathVariable Long id) {
+    return service.getTaskById(id);
+    }
     
 
 }
