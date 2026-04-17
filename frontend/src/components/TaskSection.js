@@ -27,10 +27,9 @@ function TaskSection({
           <li key={task.id}>
             <span
               style={{
-                textDecoration:
-                  task.status === "DONE" ? "line-through" : "none",
-              }}
-            >
+              textDecoration: task.status === "DONE" ? "line-through" : "none",
+              color: task.status === "DONE" ? "green" : "#333",
+              fontWeight: task.status === "DONE" ? "normal" : "bold",}}>
               {task.title} - {task.status}
             </span>
 
@@ -42,6 +41,7 @@ function TaskSection({
               </button>
             )}
           </li>
+          
         ))}
       </ul>
     </div>

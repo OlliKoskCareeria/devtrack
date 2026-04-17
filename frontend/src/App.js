@@ -102,6 +102,7 @@ function App() {
         projects={projects}
         deleteProject={deleteProject}
         selectProject={selectProject}
+        selectedProjectId={selectedProjectId}
       />
 
       <TaskSection
