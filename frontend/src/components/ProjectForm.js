@@ -1,8 +1,10 @@
 function ProjectForm({
   name,
   description,
+  deadline,
   setName,
   setDescription,
+  setDeadline,
   handleSubmit,
   errors,
 }) {
@@ -28,6 +30,11 @@ function ProjectForm({
         {errors.description && (
           <p style={{ color: "red" }}>{errors.description}</p>
         )}
+        <input
+        type="date"
+        value={deadline}
+        onChange={(e) => setDeadline(e.target.value)}
+        />
 
         <button type="submit">Add Project</button>
       </form>

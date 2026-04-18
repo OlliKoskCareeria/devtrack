@@ -1,4 +1,4 @@
-function ProjectList({ projects, deleteProject, selectProject, selectedProjectId }) {
+function ProjectList({ projects, deleteProject, selectProject, selectedProjectId, startEdit }) {
   return (
     <div>
       <h2>Projects</h2>
@@ -7,14 +7,18 @@ function ProjectList({ projects, deleteProject, selectProject, selectedProjectId
           <li
             key={project.id}
             style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              gap: "10px",
               backgroundColor:
-                project.id === selectedProjectId ? "#e3f2fd" : "transparent",
+              project.id === selectedProjectId ? "#e3f2fd" : "transparent",
               padding: "8px",
               borderRadius: "6px",
             }}
           >
             <span
-              style={{ cursor: "pointer", fontWeight: "bold",
+              style={{ cursor: "pointer", fontWeight: "bold", flex: 1, wordBreak: "break-word",
               color:
               project.status === "LATE"
               ? "red"
@@ -35,11 +39,11 @@ function ProjectList({ projects, deleteProject, selectProject, selectedProjectId
               : "-"} */}
             </span>
 
-            <div>
-              <button
-                className="delete-btn"
-                onClick={() => deleteProject(project.id)}
-              >
+            <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>
+              <button onClick={() => startEdit(project)}>
+                Edit
+              </button>
+              <button className="delete-btn" onClick={() => deleteProject(project.id)}>
                 Delete
               </button>
             </div>

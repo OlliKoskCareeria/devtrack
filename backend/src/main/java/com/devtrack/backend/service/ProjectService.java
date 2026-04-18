@@ -61,6 +61,7 @@ private String getProjectStatus(Project project) {
             .map(project -> {
                 project.setName(dto.getName());
                 project.setDescription(dto.getDescription());
+                project.setDeadline(dto.getDeadline());
                 return mapToDTO(repository.save(project));
             })
             .orElseThrow(() -> new RuntimeException("Project not found"));

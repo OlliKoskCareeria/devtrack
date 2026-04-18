@@ -2,15 +2,17 @@ import { useEffect, useState } from "react";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
 import TaskSection from "./components/TaskSection";
+import ProjectEditForm from "./components/ProjectEditForm";
 import "./App.css";
 function App() {
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
-
+  const [editingProject, setEditingProject] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [taskTitle, setTaskTitle] = useState("");
+  const [deadline, setDeadline] = useState("");
 
   const [errors, setErrors] = useState({});
 
@@ -36,7 +38,7 @@ function App() {
     fetch("http://localhost:8080/api/projects", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ name, description,deadline: deadline || null, }),
     }).then(async (res) => {
       if (!res.ok) {
         const err = await res.json();
@@ -47,14 +49,36 @@ function App() {
       setErrors({});
       setName("");
       setDescription("");
+      setDeadline("");
       fetchProjects();
     });
   };
+
+  const updateProject = () => {
+  fetch(`http://localhost:8080/api/projects/${editingProject.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(editingProject),
+  })
+    .then((res) => res.json())
+    .then((updated) => {
+      setProjects(
+        projects.map((p) => (p.id === updated.id ? updated : p))
+      );
+      setEditingProject(null); // close form
+    });
+};
 
   const deleteProject = (id) => {
     fetch(`http://localhost:8080/api/projects/${id}`, {
       method: "DELETE",
     }).then(fetchProjects);
+  };
+
+  const startEdit = (project) => {
+  setEditingProject(project);
   };
 
   const createTask = (e) => {
@@ -94,6 +118,7 @@ function App() {
         description={description}
         setName={setName}
         setDescription={setDescription}
+        setDeadline={setDeadline}
         handleSubmit={handleSubmit}
         errors={errors}
       />
@@ -103,7 +128,17 @@ function App() {
         deleteProject={deleteProject}
         selectProject={selectProject}
         selectedProjectId={selectedProjectId}
+        startEdit={startEdit}
       />
+
+      {editingProject && (
+      <ProjectEditForm
+      editingProject={editingProject}
+      setEditingProject={setEditingProject}
+      updateProject={updateProject}
+      setCancelEdit={setEditingProject}
+      />
+      )}
 
       <TaskSection
         selectedProjectId={selectedProjectId}
