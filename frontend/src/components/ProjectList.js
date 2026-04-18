@@ -14,10 +14,25 @@ function ProjectList({ projects, deleteProject, selectProject, selectedProjectId
             }}
           >
             <span
-              style={{ cursor: "pointer", fontWeight: "bold" }}
+              style={{ cursor: "pointer", fontWeight: "bold",
+              color:
+              project.status === "LATE"
+              ? "red"
+              : project.status === "AT RISK"
+              ? "orange"
+               : project.status === "ON TRACK"
+              ? "green"
+              : "gray",
+              }}
               onClick={() => selectProject(project.id)}
             >
               {project.name} - {project.description}
+              ({project.status})
+              {project.deadline && 
+              (<> - Due: {new Date(project.deadline).toLocaleDateString()}</>)}
+               {/* - Due: {project.deadline
+              ? new Date(project.deadline).toLocaleDateString()
+              : "-"} */}
             </span>
 
             <div>
