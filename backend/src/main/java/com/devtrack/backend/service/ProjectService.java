@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 import com.devtrack.backend.model.Project;
 import com.devtrack.backend.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
+import java.time.LocalDate;
 
 import java.util.List;
 
@@ -28,6 +29,20 @@ public class ProjectService {
             .orElseThrow(() -> new RuntimeException("Project not found"));
 
     return mapToDTO(project);
+}
+
+private String getProjectStatus(Project project) {
+    if (project.getDeadline() == null) return "NO DEADLINE";
+
+    LocalDate today = LocalDate.now();
+
+    if (project.getDeadline().isBefore(today)) {
+        return "LATE";
+    } else if (project.getDeadline().isBefore(today.plusDays(3))) {
+        return "AT RISK";
+    } else {
+        return "ON TRACK";
+    }
 }
 
     public ProjectDTO createProject(ProjectDTO dto) {
@@ -55,14 +70,17 @@ public class ProjectService {
     return new ProjectDTO(
             project.getId(),
             project.getName(),
-            project.getDescription()
+            project.getDescription(),
+            project.getDeadline(),
+            getProjectStatus(project)
     );
 }
 
 private Project mapToEntity(ProjectDTO dto) {
     return new Project(
             dto.getName(),
-            dto.getDescription()
+            dto.getDescription(),
+            dto.getDeadline()
     );
 }
 
