@@ -1,4 +1,4 @@
-function ProjectList({ projects, deleteProject, selectProject, selectedProjectId, startEdit }) {
+function ProjectList({ projects, deleteProject, selectProject, selectedProjectId, startEdit,openTasks, }) {
   return (
     <div>
       <h2>Projects</h2>
@@ -45,6 +45,9 @@ function ProjectList({ projects, deleteProject, selectProject, selectedProjectId
               </button>
               <button className="delete-btn" onClick={() => deleteProject(project.id)}>
                 Delete
+              </button>
+              <button onClick={() => openTasks(project.id)}>
+                Tasks
               </button>
             </div>
           </li>

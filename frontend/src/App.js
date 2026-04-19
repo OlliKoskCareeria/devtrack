@@ -13,8 +13,13 @@ function App() {
   const [description, setDescription] = useState("");
   const [taskTitle, setTaskTitle] = useState("");
   const [deadline, setDeadline] = useState("");
-
   const [errors, setErrors] = useState({});
+
+  const openTasks = (id) => {
+  setEditingProject(null);     // close edit if task open
+  setSelectedProjectId(id);
+  fetchTasks(id);
+};
 
   const fetchProjects = () => {
     fetch("http://localhost:8080/api/projects")
@@ -77,10 +82,14 @@ function App() {
     }).then(fetchProjects);
   };
 
+  // const startEdit = (project) => {
+  // setEditingProject(project);
+  // };
+
   const startEdit = (project) => {
+  setSelectedProjectId(null);  
   setEditingProject(project);
   };
-
   const createTask = (e) => {
     e.preventDefault();
 
@@ -122,15 +131,16 @@ function App() {
         handleSubmit={handleSubmit}
         errors={errors}
       />
-
+<div className="main-layout">
       <ProjectList
         projects={projects}
         deleteProject={deleteProject}
         selectProject={selectProject}
         selectedProjectId={selectedProjectId}
         startEdit={startEdit}
+        openTasks={openTasks}
       />
-
+        
       {editingProject && (
       <ProjectEditForm
       editingProject={editingProject}
@@ -139,7 +149,7 @@ function App() {
       setCancelEdit={setEditingProject}
       />
       )}
-
+      {selectedProjectId &&(
       <TaskSection
         selectedProjectId={selectedProjectId}
         tasks={tasks}
@@ -147,7 +157,10 @@ function App() {
         setTaskTitle={setTaskTitle}
         createTask={createTask}
         updateTaskStatus={updateTaskStatus}
+        setSelectedProjectId={setSelectedProjectId}
       />
+      )}
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ function TaskSection({
   setTaskTitle,
   createTask,
   updateTaskStatus,
+  setSelectedProjectId,
 }) {
   if (!selectedProjectId) return null;
 
@@ -38,12 +39,16 @@ function TaskSection({
                 onClick={() => updateTaskStatus(task.id, "DONE")}
               >
                 Mark as Done
-              </button>
+              </button>  
             )}
+            
           </li>
           
         ))}
       </ul>
+      <button onClick={() => setSelectedProjectId(null)}>
+              Close Tasks
+            </button>
     </div>
   );
 }
