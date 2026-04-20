@@ -6,7 +6,7 @@ import ProjectEditForm from "./components/ProjectEditForm";
 import "./App.css";
 const API_BASE_URL = process.env.REACT_APP_API_URL;
 function App() {
-  
+  const [loading, setLoading] = useState(false);
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
@@ -24,9 +24,11 @@ function App() {
 };
 
   const fetchProjects = () => {
+    setLoading(true);
     fetch(`${API_BASE_URL}/api/projects`)
       .then((res) => res.json())
-      .then(setProjects);
+      .then(setProjects)
+      .finally(() => setLoading(false));
   };
 
   const fetchTasks = (projectId) => {
@@ -134,6 +136,7 @@ function App() {
         errors={errors}
       />
 <div className="main-layout">
+  {loading && <p>Waking up server... ⏳</p>}
       <ProjectList
         projects={projects}
         deleteProject={deleteProject}
