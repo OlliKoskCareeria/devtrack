@@ -4,7 +4,9 @@ import ProjectList from "./components/ProjectList";
 import TaskSection from "./components/TaskSection";
 import ProjectEditForm from "./components/ProjectEditForm";
 import "./App.css";
+const API_BASE_URL = process.env.REACT_APP_API_URL;
 function App() {
+  
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [selectedProjectId, setSelectedProjectId] = useState(null);
@@ -22,13 +24,13 @@ function App() {
 };
 
   const fetchProjects = () => {
-    fetch("http://localhost:8080/api/projects")
+    fetch(`${API_BASE_URL}/api/projects`)
       .then((res) => res.json())
       .then(setProjects);
   };
 
   const fetchTasks = (projectId) => {
-    fetch("http://localhost:8080/api/tasks")
+    fetch(`${API_BASE_URL}/api/tasks`)
       .then((res) => res.json())
       .then((data) =>
         setTasks(data.filter((t) => t.project?.id === projectId))
@@ -40,7 +42,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/api/projects", {
+    fetch(`${API_BASE_URL}/api/projects`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, description,deadline: deadline || null, }),
@@ -60,7 +62,7 @@ function App() {
   };
 
   const updateProject = () => {
-  fetch(`http://localhost:8080/api/projects/${editingProject.id}`, {
+  fetch(`${API_BASE_URL}/api/projects/${editingProject.id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -77,7 +79,7 @@ function App() {
 };
 
   const deleteProject = (id) => {
-    fetch(`http://localhost:8080/api/projects/${id}`, {
+    fetch(`${API_BASE_URL}/api/projects/${id}`, {
       method: "DELETE",
     }).then(fetchProjects);
   };
@@ -93,7 +95,7 @@ function App() {
   const createTask = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:8080/api/tasks/${selectedProjectId}`, {
+    fetch(`${API_BASE_URL}/api/tasks/${selectedProjectId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +108,7 @@ function App() {
   };
 
   const updateTaskStatus = (id, status) => {
-    fetch(`http://localhost:8080/api/tasks/${id}/status`, {
+    fetch(`${API_BASE_URL}/api/tasks/${id}/status`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status }),
