@@ -80,16 +80,19 @@ function App() {
     });
 };
 
-  const deleteProject = (id) => {
-    fetch(`${API_BASE_URL}/api/projects/${id}`, {
-      method: "DELETE",
-    }).then(fetchProjects);
-  };
+const deleteProject = (id) => {
+  fetch(`${API_BASE_URL}/api/projects/${id}`, {
+    method: "DELETE",
+  }).then(() => {
+    if (selectedProjectId === id) {
+      setSelectedProjectId(null);
+      setTasks([]);
+    }
+    fetchProjects();
+  });
+};
 
-  // const startEdit = (project) => {
-  // setEditingProject(project);
-  // };
-
+  
   const startEdit = (project) => {
   setSelectedProjectId(null);  
   setEditingProject(project);
@@ -116,6 +119,12 @@ function App() {
       body: JSON.stringify({ status }),
     }).then(() => fetchTasks(selectedProjectId));
   };
+
+  const deleteTask = (id) => {
+  fetch(`${API_BASE_URL}/api/tasks/${id}`, {
+    method: "DELETE",
+  }).then(() => fetchTasks(selectedProjectId));
+};
 
   const selectProject = (id) => {
     setSelectedProjectId(id);
@@ -163,6 +172,7 @@ function App() {
         createTask={createTask}
         updateTaskStatus={updateTaskStatus}
         setSelectedProjectId={setSelectedProjectId}
+        deleteTask={deleteTask}
       />
       )}
       </div>

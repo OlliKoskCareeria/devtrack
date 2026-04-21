@@ -153,7 +153,7 @@ This project is licensed under the MIT License.
 
 ## 💬 About
 
-This project was built as a full-stack learning exercise to practice backend development with Spring Boot and frontend development with React, focusing on clean architecture, API design, and user interface implementation.
+This project was built as a full-stack portfolio project to implement backend development with Spring Boot and frontend development with React, focusing on clean architecture, API design, and user interface implementation.
 
 🚀 Deployment Notes
 
@@ -164,6 +164,7 @@ The backend is deployed on Render.
 Hosted on: Render
 Auto-deploys on every push to the main branch
 Built using Docker + Spring Boot
+
 💤 Cold Start Behavior
 
 Runs on a free tier, it may enter an idle state when not in use.
@@ -171,21 +172,22 @@ Runs on a free tier, it may enter an idle state when not in use.
 First request after inactivity may take ~20–30 seconds
 This delay is due to the server “waking up” from sleep
 Subsequent requests are fast and responsive
+
 🗄️ Database Configuration
 
 The application uses an H2 in-memory database for testing the UI behaviour.
-
 No external database setup required
 Data is stored only during runtime(resets on restart or redeploy)
 Schema is recreated on each restart
+
 ⚠️ Important Limitations
 
 Because of the current setup:
-
-
 Suitable for demo / portfolio purposes only
 Not intended for production use
+
 💡 Architecture Overview
+
 Frontend: React (local development / deployable separately)
 Backend: Spring Boot REST API
 Database: H2 (in-memory)

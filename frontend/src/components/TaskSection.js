@@ -6,6 +6,7 @@ function TaskSection({
   createTask,
   updateTaskStatus,
   setSelectedProjectId,
+  deleteTask,
 }) {
   if (!selectedProjectId) return null;
 
@@ -41,6 +42,9 @@ function TaskSection({
                 Mark as Done
               </button>  
             )}
+              <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+                🗑 
+              </button>
             
           </li>
           
