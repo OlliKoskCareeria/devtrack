@@ -7,12 +7,13 @@ function TaskSection({
   updateTaskStatus,
   setSelectedProjectId,
   deleteTask,
+  project,
 }) {
   if (!selectedProjectId) return null;
 
   return (
     <div>
-      <h2>Tasks</h2>
+      <h2>Tasks for: {project?.name}</h2>
 
       <form onSubmit={createTask}>
         <input
@@ -26,27 +27,32 @@ function TaskSection({
 
       <ul>
         {tasks.map((task) => (
-          <li key={task.id}>
-            <span
-              style={{
-              textDecoration: task.status === "DONE" ? "line-through" : "none",
-              color: task.status === "DONE" ? "green" : "#333",
-              fontWeight: task.status === "DONE" ? "normal" : "bold",}}>
-              {task.title} - {task.status}
-            </span>
+          <li key={task.id} className="task-item">
+  
+  <span
+    className="task-text"
+    style={{
+      textDecoration: task.status === "DONE" ? "line-through" : "none",
+      color: task.status === "DONE" ? "green" : "#333",
+      fontWeight: task.status === "DONE" ? "normal" : "bold",
+    }}
+  >
+    {task.title} - {task.status}
+  </span>
 
-            {task.status !== "DONE" && (
-              <button
-                onClick={() => updateTaskStatus(task.id, "DONE")}
-              >
-                Mark as Done
-              </button>  
-            )}
-              <button className="delete-btn" onClick={() => deleteTask(task.id)}>
-                🗑 
-              </button>
-            
-          </li>
+  <div className="task-actions">
+    {task.status !== "DONE" && (
+      <button onClick={() => updateTaskStatus(task.id, "DONE")}>
+        Mark as Done
+      </button>
+    )}
+
+    <button className="delete-btn" onClick={() => deleteTask(task.id)}>
+      🗑
+    </button>
+  </div>
+
+</li>
           
         ))}
       </ul>

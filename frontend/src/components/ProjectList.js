@@ -30,13 +30,26 @@ function ProjectList({ projects, deleteProject, selectProject, selectedProjectId
               }}
               onClick={() => selectProject(project.id)}
             >
-              {project.name} - {project.description}
-              ({project.status})
-              {project.deadline && 
-              (<> - Due: {new Date(project.deadline).toLocaleDateString()}</>)}
-               {/* - Due: {project.deadline
-              ? new Date(project.deadline).toLocaleDateString()
-              : "-"} */}
+              <div className="project-text">
+  <div className="project-name">
+    {project.name}
+  </div>
+
+  <div className="project-desc">
+    {project.description}
+  </div>
+
+  <div className="project-status">
+    {project.status}
+  </div>
+
+  {project.deadline && (
+    <div className="project-deadline">
+      Due: {new Date(project.deadline).toLocaleDateString()}
+    </div>
+  )}
+</div>
+               
             </span>
 
             <div style={{ display: "flex", gap: "6px", flexShrink: 0 }}>

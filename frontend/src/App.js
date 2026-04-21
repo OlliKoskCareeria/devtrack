@@ -16,6 +16,7 @@ function App() {
   const [taskTitle, setTaskTitle] = useState("");
   const [deadline, setDeadline] = useState("");
   const [errors, setErrors] = useState({});
+  const selectedProject = projects.find(p => p.id === selectedProjectId);
 
   const openTasks = (id) => {
   setEditingProject(null);     // close edit if task open
@@ -146,14 +147,16 @@ const deleteProject = (id) => {
       />
 <div className="main-layout">
   {loading && <p>Waking up server... ⏳</p>}
-      <ProjectList
-        projects={projects}
-        deleteProject={deleteProject}
-        selectProject={selectProject}
-        selectedProjectId={selectedProjectId}
-        startEdit={startEdit}
-        openTasks={openTasks}
-      />
+      <div className={selectedProjectId ? "hide-on-mobile" : ""}>
+        <ProjectList
+          projects={projects}
+          deleteProject={deleteProject}
+          selectProject={selectProject}
+          selectedProjectId={selectedProjectId}
+          startEdit={startEdit}
+          openTasks={openTasks}
+        />
+      </div>
         
       {editingProject && (
       <ProjectEditForm
@@ -173,6 +176,7 @@ const deleteProject = (id) => {
         updateTaskStatus={updateTaskStatus}
         setSelectedProjectId={setSelectedProjectId}
         deleteTask={deleteTask}
+        project={selectedProject}
       />
       )}
       </div>

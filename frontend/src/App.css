@@ -24,6 +24,12 @@ body {
   .main-layout {
     flex-direction: column;
   }
+  .hide-on-mobile {
+    display: none;
+  }
+  body {
+    font-size: 12px;
+  }
 }
 
 h1 {
@@ -103,4 +109,17 @@ input {
 input:focus {
   outline: none;
   border: 1px solid #1976d2;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0; 
 }
