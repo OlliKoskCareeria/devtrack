@@ -142,6 +142,7 @@ const deleteProject = (id) => {
         setName={setName}
         setDescription={setDescription}
         setDeadline={setDeadline}
+        deadline={deadline}
         handleSubmit={handleSubmit}
         errors={errors}
       />
