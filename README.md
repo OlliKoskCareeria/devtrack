@@ -3,6 +3,13 @@
 DevTrack is a full-stack project and task management application built with **Spring Boot** and **React**.
 It allows users to create projects, manage tasks, track progress, and monitor deadlines with status updates.
 
+🌐 Live Demo
+
+Frontend: https://devtrack210426.netlify.app/
+
+Backend: https://devtrack190426.onrender.com
+
+⚠️ Note: The backend is hosted on a free tier on Render and may take ~20–30 seconds to respond on first request due to cold start.
 ---
 
 ## 🚀 Features
@@ -65,6 +72,26 @@ It allows users to create projects, manage tasks, track progress, and monitor de
 * CSS
 
 ---
+⚙️ Local Setup Notes
+
+💡 For quick evaluation, use the live demo above.
+Local setup is optional and described below.
+
+Frontend Environment Setup
+
+Create a .env file inside the frontend folder:
+content: REACT_APP_API_URL=YOUR_BACKEND_URL
+
+⚠️ CORS Configuration (Local Development)
+
+The backend is configured to allow requests from the deployed frontend.
+
+If running the frontend locally, you may need to allow your local development origin in the backend CORS configuration, for example:
+
+http://localhost:3000
+
+Note: The port may vary depending on your development setup.
+
 
 ## ⚙️ Getting Started
 
@@ -94,18 +121,26 @@ Mac/Linux:
 
 ---
 
+🗄️ Database Options
+
+By default, the application uses an H2 in-memory database:
+
+No setup required
+Data resets on restart
+Ideal for quick testing and demo purposes
+🔧 Optional: PostgreSQL (Local Development)
+
+For a more production-like setup, you can configure PostgreSQL locally.
+
+see application.properties.example and set up application.properties with your PostgreSQL credentials
+
+Note: PostgreSQL is optional and not required to run the project
 ### 3. Frontend setup
 
 ```bash
 cd frontend
 npm install
 npm start
-```
-
-The app will run on:
-
-```text
-http://localhost:3000
 ```
 
 ---

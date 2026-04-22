@@ -30,5 +30,7 @@ yarn-error.log*
 # local config files
 .env.*.local
 .env
+# exception for example 
+!.env.example 
 # OS / editor
 .DS_Store
