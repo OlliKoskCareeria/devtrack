@@ -5,9 +5,8 @@ It allows users to create projects, manage tasks, track progress, and monitor de
 
 🌐 Live Demo
 
-Frontend: https://devtrack210426.netlify.app/
+https://devtrack210426.netlify.app/
 
-Backend: https://devtrack190426.onrender.com
 
 ⚠️ Note: The backend is hosted on a free tier on Render and may take ~20–30 seconds to respond on first request due to cold start.
 ---
